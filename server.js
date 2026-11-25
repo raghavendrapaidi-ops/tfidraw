@@ -9,8 +9,8 @@ const app = express();
 const server = http.createServer(app);
 const io = new Server(server, { maxHttpBufferSize: 1e6 });
 
-app.use(express.static(path.join(__dirname, 'public')));
-app.get('/r/:code', (_req, res) => res.sendFile(path.join(__dirname, 'public', 'index.html')));
+app.use(express.static(__dirname));
+app.get('/r/:code', (_req, res) => res.sendFile(path.join(__dirname, 'index.html')));
 
 // ---------- helpers ----------
 const MAX_PLAYERS = 12;
