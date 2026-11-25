@@ -96,7 +96,14 @@ function tick() { const s = Math.max(0, Math.ceil((endAt - performance.now()) / 
 // ---------- overlay ----------
 function showOverlay(html) { const o = $('overlay'); o.innerHTML = html; o.classList.remove('hidden'); }
 function hideOverlay() { $('overlay').classList.add('hidden'); $('overlay').innerHTML = ''; }
-const setHint = (t, mine) => { $('hint').innerHTML = mine ? `<span class="drawword">${esc(t)}</span>` : esc(t).split('').join(' '); };
+const setHint = (t, mine) => {
+  t = t || '';
+  const counts = t.split(' ').map(w => w.replace(/[^A-Za-z0-9_]/g, '').length).filter(n => n > 0);
+  const meta = counts.length ? `<div class="meta">${counts.join(' · ')} letters</div>` : '';
+  if (mine) { $('hint').innerHTML = `<div class="drawword">${esc(t)}</div>${meta}`; return; }
+  const words = t.split(' ').map(w => `<span class="word">${w.split('').map(c => c === '_' ? '<span class="ch blank"></span>' : `<span class="ch">${esc(c)}</span>`).join('')}</span>`).join('');
+  $('hint').innerHTML = `<div class="chars">${words}</div>${meta}`;
+};
 
 socket.on('turn:choosing', d => {
   drawerId = d.drawerId; isDrawer = d.drawerId === me; myWord = null; room.drawerId = d.drawerId; room.state = 'choosing';

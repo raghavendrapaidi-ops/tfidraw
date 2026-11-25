@@ -78,8 +78,13 @@ input:focus,select:focus{outline:3px solid var(--gold)}
 .round{font-size:15px;min-width:90px}
 .hintwrap{flex:1;text-align:center}
 .hintlabel{font-size:11px;letter-spacing:2px;color:var(--muted)}
-.hint{font-size:30px;letter-spacing:5px;white-space:pre-wrap;word-break:break-word;line-height:1.1}
-.hint .drawword{color:var(--violet);letter-spacing:3px}
+.hint{font-size:30px;line-height:1.1}
+.hint .chars{display:flex;flex-wrap:wrap;justify-content:center;gap:4px 18px}
+.hint .word{display:inline-flex;gap:4px;align-items:flex-end}
+.hint .ch{display:inline-block;min-width:.55em;text-align:center;font-size:1em;line-height:1.15}
+.hint .ch.blank{width:.7em;height:1.05em;border-bottom:4px solid var(--ink)}
+.hint .meta{font-family:'Nunito',sans-serif;font-weight:800;font-size:13px;letter-spacing:1px;color:var(--muted);margin-top:3px}
+.hint .drawword{color:var(--violet);letter-spacing:2px;word-break:break-word}
 .timer{width:54px;height:54px;border-radius:50%;border:3px solid var(--ink);display:grid;place-items:center;font-size:24px;background:var(--gold)}
 .timer.low{background:var(--coral);color:#fff;animation:pulse .6s infinite}
 @keyframes pulse{50%{transform:scale(1.12)}}
@@ -133,15 +138,37 @@ input:focus,select:focus{outline:3px solid var(--gold)}
 .toast.show{opacity:1;transform:translate(-50%,0)}
 
 @media (max-width:900px){
-  #game{height:auto;min-height:100vh}
+  #game{height:auto;min-height:100vh;padding:6px}
   #game.active{display:block}
-  .layout{display:flex;flex-direction:column}
-  .players{order:3}.chat{order:2;height:260px}
-  .center{order:1}
-  .canvaswrap,.tools{max-width:100%}
+  .topbar{flex-wrap:wrap;padding:6px 10px;margin-bottom:8px;gap:6px 10px;box-shadow:3px 3px 0 var(--ink)}
+  .round{order:1;flex:1;min-width:0;font-size:14px}
+  .timer{order:2;width:44px;height:44px;font-size:20px}
+  .hintwrap{order:3;flex:1 0 100%}
+  .hint{font-size:26px}
+  .hint .chars{gap:4px 14px}
+  .hint .ch.blank{border-bottom-width:3px}
+  .hint .drawword{font-size:28px}
+  .layout{display:flex;flex-direction:column;gap:8px}
+  .center{order:1;gap:8px;width:100%}
+  .chat{order:2;height:210px;box-shadow:3px 3px 0 var(--ink)}
+  .players{order:3;box-shadow:3px 3px 0 var(--ink)}
+  .canvaswrap,.tools{max-width:100%;width:100%}
+  .canvaswrap{box-shadow:3px 3px 0 var(--ink)}
+  .tools{padding:6px;gap:6px;box-shadow:3px 3px 0 var(--ink)}
+  .palette{grid-template-columns:repeat(10,1fr);width:100%;gap:3px}
+  .sw{width:100%;height:auto;aspect-ratio:1}
+  .sizes{flex:1;justify-content:space-between}
+  .sz,.tool{width:40px;height:40px}
+  .tool{font-size:19px}
   .plist.game{flex-direction:row;flex-wrap:wrap}
-  .plist.game li{flex:1 1 130px}
-  .hint{font-size:22px;letter-spacing:3px}
-  .palette{grid-template-columns:repeat(10,22px)}.sw{width:22px;height:22px}
+  .plist.game li{flex:1 1 140px}
+  .overlay{padding:10px;gap:8px;justify-content:flex-start}
+  .overlay h2{font-size:22px}
+  .overlay .big{font-size:30px}
+  .choices{flex-direction:column;width:100%;gap:8px}
+  .choice{width:100%;font-size:20px;padding:10px 14px;min-width:0}
+  .board{width:100%}.board li{padding:4px 8px;margin-bottom:3px;font-size:14px}
+  #chatInput{font-size:16px}
   .settings{grid-template-columns:1fr}
+  .logo h1{font-size:44px}
 }
